@@ -147,7 +147,7 @@ if __name__ == "__main__":
 
     results = app.invoke(
         {
-            "message":[
+            "messages":[
                 HumanMessage(content=user_input)
             ],
             "user_query": user_input,
