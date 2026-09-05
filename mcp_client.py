@@ -22,14 +22,34 @@ client = MultiServerMCPClient(
 # ab mcp-server , mcp-client se puchega ki kon kon sa tools hai apke pass
 # tools discovery
 
+# async def main():
+#     tools = await client.get_tools()
+
+#     print("\nAvailable MCP Tools:\n")
+
+#     for tool in tools:
+#         print(tool.name)
+
+
+# modifying the main function
+
 async def main():
+
     tools = await client.get_tools()
+    print("client_get_tools", tools)
+    search_tool = next(
+        tool
+        for tool in tools
+        if tool.name == "tavily_search"
+    )
 
-    print("\nAvailable MCP Tools:\n")
+    result = await search_tool.ainvoke(
+        {
+            "query":"Best hotels in Delhi"
+        }
+    )
 
-    for tool in tools:
-        print(tool.name)
-
+    print(result)
 
 if __name__ == "__main__":
     asyncio.run(main())
